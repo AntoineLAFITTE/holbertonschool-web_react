@@ -1,4 +1,3 @@
-// Define student interface :
 interface Student {
   firstName: string;
   lastName: string;
@@ -6,54 +5,56 @@ interface Student {
   location: string;
 }
 
-// Create 2 students :
+// Create 2 student objects :
 const student1: Student = {
-  firstName: "Alice",
-  lastName: "Johnson",
-  age: 22,
-  location: "New York"
+  firstName: "John",
+  lastName: "Doe",
+  age: 20,
+  location: "New York",
 };
 
 const student2: Student = {
-  firstName: "Bob",
+  firstName: "Jane",
   lastName: "Smith",
-  age: 25,
-  location: "Los Angeles"
+  age: 22,
+  location: "Los Angeles",
 };
 
 // Store students in an array :
 const studentsList: Student[] = [student1, student2];
 
-// Create table and add it to the body :
-const table: HTMLTableElement = document.createElement("table");
-const tbody: HTMLTableSectionElement = document.createElement("tbody");
+// Function to render a table with student details
+function renderTable(): void {
+  // Create table and add it to the body
+  const table = document.createElement("table");
+  const headerRow = document.createElement("tr");
 
-// Add table headers
-const thead: HTMLTableSectionElement = document.createElement("thead");
-const headerRow: HTMLTableRowElement = document.createElement("tr");
-const header1: HTMLTableCellElement = document.createElement("th");
-const header2: HTMLTableCellElement = document.createElement("th");
-header1.textContent = "First Name";
-header2.textContent = "Location";
-headerRow.appendChild(header1);
-headerRow.appendChild(header2);
-thead.appendChild(headerRow);
-table.appendChild(thead);
+  // Create table headers
+  const th1 = document.createElement("th");
+  th1.textContent = "First Name";
+  const th2 = document.createElement("th");
+  th2.textContent = "Location";
+  headerRow.appendChild(th1);
+  headerRow.appendChild(th2);
+  table.appendChild(headerRow);
 
-// Add student rows to table :
-studentsList.forEach((student) => {
-  const row: HTMLTableRowElement = document.createElement("tr");
-  const cell1: HTMLTableCellElement = document.createElement("td");
-  const cell2: HTMLTableCellElement = document.createElement("td");
+  // Loop through the studentsList and create rows
+  studentsList.forEach((student) => {
+    const row = document.createElement("tr");
 
-  cell1.textContent = student.firstName;
-  cell2.textContent = student.location;
+    const firstNameCell = document.createElement("td");
+    firstNameCell.textContent = student.firstName;
+    const locationCell = document.createElement("td");
+    locationCell.textContent = student.location;
 
-  row.appendChild(cell1);
-  row.appendChild(cell2);
-  tbody.appendChild(row);
-});
+    row.appendChild(firstNameCell);
+    row.appendChild(locationCell);
+    table.appendChild(row);
+  });
 
-// Add tbody to table and add the table to the document body
-table.appendChild(tbody);
-document.body.appendChild(table);
+  // Add table to the body
+  document.body.appendChild(table);
+}
+
+// render table to check
+renderTable();
